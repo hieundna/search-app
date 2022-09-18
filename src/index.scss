@@ -1,0 +1,16 @@
+@import 'style/mobile.scss';
+@import 'style/components/search.scss';
+
+body {
+  margin: 0
+}
+
+.App {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+
+  .header {
+    padding: 10px 20px;
+  }
+}
