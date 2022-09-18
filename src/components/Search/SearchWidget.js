@@ -12,7 +12,9 @@ function SearchWidget(props) {
     disabled,
     data,
     settingFlag,
-    settings
+    settings,
+    handleChange,
+    handleSubmit
   } = props
 
   const _search = useRef()
@@ -41,6 +43,10 @@ function SearchWidget(props) {
       setIsVisible(false)
       setResult(null)
     }
+    
+    if(handleChange) {
+      handleChange()
+    }
   }
 
   const getSearchObjectResult = (val) => {
@@ -63,20 +69,22 @@ function SearchWidget(props) {
 
   return (
     <div className="searchBar">
-      <input
-        ref={_search}
-        className='search-input'
-        id={id}
-        type='text'
-        value={search}
-        placeholder={placeholder}
-        onFocus={(e) => {
-          if(e.target.value.length >= characterNumber && e.target.value.length > 0)
-            setIsVisible(true)
-        }}
-        onChange={handleSearchChange}
-        disabled={disabled}
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          ref={_search}
+          className='search-input'
+          id={id}
+          type='text'
+          value={search}
+          placeholder={placeholder}
+          onFocus={(e) => {
+            if(e.target.value.length >= characterNumber && e.target.value.length > 0)
+              setIsVisible(true)
+          }}
+          onChange={handleSearchChange}
+          disabled={disabled}
+        />
+      </form>
       <SuggestionSearch id={id} visible={{isVisible, setIsVisible}} result={result} settingSuggestion={settingSuggestion} />
       
       {(settings && settings.length > 0) &&
@@ -100,6 +108,8 @@ SearchWidget.defaultProps = {
   data: null,
   settingFlag: false,
   settings: ['term', 'collection', 'product'],
+  handleChange: null,
+  handleSubmit: null,
 }
 
 SearchWidget.propTypes = {
@@ -111,6 +121,8 @@ SearchWidget.propTypes = {
   disabled: PropTypes.bool,
   settingFlag: PropTypes.bool,
   settings: PropTypes.arrayOf(PropTypes.string),
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
 }
 
 export default SearchWidget

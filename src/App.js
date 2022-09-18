@@ -24,9 +24,9 @@ function App() {
         <SearchWidget
           id='search'
           data={data}
-          disabled={fetching}
+          disabled={fetching || !data}
           placeholder='Search'
-          settingFlag={true}
+          settingFlag={!!data}
           settings={['term', 'collection', 'product']}
         />
       </div>

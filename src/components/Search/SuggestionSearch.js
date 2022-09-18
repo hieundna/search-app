@@ -104,7 +104,7 @@ SuggestionSearch.propTypes = {
   id: PropTypes.string,
   result: PropTypes.object,
   settingSuggestion: PropTypes.object,
-  visible: PropTypes.bool,
+  visible: PropTypes.object,
 }
 
 export default SuggestionSearch
