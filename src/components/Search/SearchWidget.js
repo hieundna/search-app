@@ -13,8 +13,10 @@ function SearchWidget(props) {
     data,
     settingFlag,
     settings,
+    numberOfCharacter,
     handleChange,
-    handleSubmit
+    handleSubmit,
+    productCustom
   } = props
 
   const _search = useRef()
@@ -26,7 +28,7 @@ function SearchWidget(props) {
     collection: settings && settings.includes('collection'),
     product: settings && settings.includes('product'),
   })
-  const [characterNumber, setCharacterNumber] = useState(0)
+  const [characterNumber, setCharacterNumber] = useState(numberOfCharacter)
   const [result, setResult] = useState(null)
 
 
@@ -85,7 +87,13 @@ function SearchWidget(props) {
           disabled={disabled}
         />
       </form>
-      <SuggestionSearch id={id} visible={{isVisible, setIsVisible}} result={result} settingSuggestion={settingSuggestion} />
+      <SuggestionSearch
+        id={id}
+        visible={{isVisible, setIsVisible}}
+        result={result}
+        settingSuggestion={settingSuggestion}
+        productCustom={productCustom}
+      />
       
       {(settings && settings.length > 0) &&
         <SearchSetting 
@@ -108,8 +116,10 @@ SearchWidget.defaultProps = {
   data: null,
   settingFlag: false,
   settings: ['term', 'collection', 'product'],
+  numberOfCharacter: 0,
   handleChange: null,
   handleSubmit: null,
+  productCustom: null,
 }
 
 SearchWidget.propTypes = {
@@ -121,8 +131,10 @@ SearchWidget.propTypes = {
   disabled: PropTypes.bool,
   settingFlag: PropTypes.bool,
   settings: PropTypes.arrayOf(PropTypes.string),
+  numberOfCharacter: PropTypes.number,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
+  productCustom: PropTypes.node,
 }
 
 export default SearchWidget

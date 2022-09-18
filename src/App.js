@@ -28,6 +28,7 @@ function App() {
           placeholder='Search'
           settingFlag={!!data}
           settings={['term', 'collection', 'product']}
+          numberOfCharacter={3}
         />
       </div>
     </div>

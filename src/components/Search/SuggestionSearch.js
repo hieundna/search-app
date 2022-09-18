@@ -7,6 +7,7 @@ function SuggestionSearch(props) {
     result,
     settingSuggestion,
     visible,
+    productCustom,
   } = props
 
   const onBlurSuggestion = useCallback((e) => {
@@ -69,7 +70,8 @@ function SuggestionSearch(props) {
               Products
             </div>
             <div className="result">
-                {result.product.slice(0,3).map((item, index) => 
+              {productCustom ? productCustom
+                : result.product.slice(0,3).map((item, index) => 
                   <div className="item product" key={index} onClick={() => window.open(item.url)}>
                     <div className="product-image">
                       <img src={item.image} width='80' height='100' alt='cloth' />
@@ -98,6 +100,7 @@ SuggestionSearch.defaultProps = {
   result: null,
   settingSuggestion: null,
   visible: false,
+  productCustom: null,
 }
 
 SuggestionSearch.propTypes = {
@@ -105,6 +108,7 @@ SuggestionSearch.propTypes = {
   result: PropTypes.object,
   settingSuggestion: PropTypes.object,
   visible: PropTypes.object,
+  productCustom: PropTypes.node,
 }
 
 export default SuggestionSearch
